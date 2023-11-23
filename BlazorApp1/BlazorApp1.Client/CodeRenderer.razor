@@ -3,35 +3,7 @@
 
 <pre><StandaloneCodeEditor @key="1" ConstructionOptions="@GetOptions" /></pre>
 
-@* @if (IsWasmRender())
-{
-    <pre><StandaloneCodeEditor @key="1" ConstructionOptions="@GetOptions" /></pre>
-}
-else
-{
-    <pre style="font-size: 14px; line-height: 19px; overflow-x:overlay"><code>@string.Join(Environment.NewLine, Code)</code></pre>
-} *@
 @code {
-    // public bool IsWasmRender()
-    // {
-    //     var jsRuntime = _services.GetRequiredService<IJSRuntime>();
-    //     if (jsRuntime is JSInProcessRuntime)
-    //     {
-    //         return true;
-    //     }
-    //     else if (jsRuntime.GetType().Name == "RemoteJSRuntime")
-    //     {
-    //         return false;
-    //     }
-    //     else if (jsRuntime.GetType().Name == "WebViewJSRuntime")
-    //     {
-    //         return false;
-    //     }
-    //     else
-    //     {
-    //         return false;
-    //     }
-    // }
 
     [Parameter]
     public List<string> Code { get; set; }
