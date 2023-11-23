@@ -1,0 +1,9 @@
+﻿@page "/"
+@page "/test/{param}"
+
+<MyComponent Name="@Param" />
+
+@code{
+    [Parameter]
+    public string Param { get; set; }
+}

@@ -1,0 +1,19 @@
+﻿@using System.Text
+
+
+<div>
+    Number: @Name
+
+    <CodeRenderer Code="@Code" @rendermode="RenderMode.InteractiveWebAssembly" />
+
+    Link:
+    <a href="/test/@Random.Shared.Next(1000)">Random Link</a>
+</div>
+
+
+@code {
+    public List<string> Code { get; set; } = new List<string>() { "public void Main()", "{", "}" };
+
+    [Parameter]
+    public string Name { get; set; }
+}

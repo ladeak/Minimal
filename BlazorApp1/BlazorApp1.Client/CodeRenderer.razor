@@ -1,0 +1,80 @@
+﻿@using BlazorMonaco.Editor;
+@using Microsoft.JSInterop
+
+<pre><StandaloneCodeEditor @key="1" ConstructionOptions="@GetOptions" /></pre>
+
+@* @if (IsWasmRender())
+{
+    <pre><StandaloneCodeEditor @key="1" ConstructionOptions="@GetOptions" /></pre>
+}
+else
+{
+    <pre style="font-size: 14px; line-height: 19px; overflow-x:overlay"><code>@string.Join(Environment.NewLine, Code)</code></pre>
+} *@
+@code {
+    // public bool IsWasmRender()
+    // {
+    //     var jsRuntime = _services.GetRequiredService<IJSRuntime>();
+    //     if (jsRuntime is JSInProcessRuntime)
+    //     {
+    //         return true;
+    //     }
+    //     else if (jsRuntime.GetType().Name == "RemoteJSRuntime")
+    //     {
+    //         return false;
+    //     }
+    //     else if (jsRuntime.GetType().Name == "WebViewJSRuntime")
+    //     {
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
+
+    [Parameter]
+    public List<string> Code { get; set; }
+
+    public StandaloneEditorConstructionOptions GetOptions(StandaloneCodeEditor editor)
+    {
+        int lineHeight = 19;
+        var totalHeight = lineHeight * Code.Count;
+        return new StandaloneEditorConstructionOptions()
+            {
+                AutomaticLayout = true,
+                Language = "csharp",
+                Value = string.Join(Environment.NewLine, Code),
+                Scrollbar = new EditorScrollbarOptions()
+                {
+                    UseShadows = false,
+                    Vertical = "Hidden",
+                    AlwaysConsumeMouseWheel = false,
+                    VerticalScrollbarSize = 0,
+                    VerticalSliderSize = 0,
+                    Horizontal = "Auto"
+                },
+                ScrollBeyondLastColumn = 0,
+                ScrollBeyondLastLine = false,
+                GlyphMargin = false,
+                Folding = false,
+                Contextmenu = false,
+                CodeLens = false,
+                Minimap = new EditorMinimapOptions() { Enabled = false },
+                ReadOnly = true,
+                LineNumbers = "off",
+                LineDecorationsWidth = 0,
+                Lightbulb = new EditorLightbulbOptions() { Enabled = false },
+                RenderFinalNewline = false,
+                RenderValidationDecorations = "off",
+                OverviewRulerBorder = false,
+                OverviewRulerLanes = 0,
+                Theme = "vs-light",
+                FixedOverflowWidgets = true,
+                LineHeight = lineHeight,
+                Dimension = new Dimension { Height = totalHeight },
+                ColorDecorators = true,
+                OccurrencesHighlight = true,
+            };
+    }
+}
